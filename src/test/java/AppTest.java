@@ -22,16 +22,16 @@ public class AppTest extends FluentTest {
 
   @Before
     public void setUp() {
-    DB.sql2o = new Sql2o("jdbc:postgresql://localhost:5432/to_do_test", null, null);
+    DB.sql2o = new Sql2o("jdbc:postgresql://localhost:5432/hair_salon_test", null, null);
   }
 
   @After
   public void tearDown() {
     try(Connection con = DB.sql2o.open()) {
-      String deleteTasksQuery = "DELETE FROM tasks *;";
-      String deleteCategoriesQuery = "DELETE FROM categories *;";
-      con.createQuery(deleteTasksQuery).executeUpdate();
-      con.createQuery(deleteCategoriesQuery).executeUpdate();
+      String deleteClientQuery = "DELETE FROM client *;";
+      String deleteStylistQuery = "DELETE FROM stylist *;";
+      con.createQuery(deleteClientQuery).executeUpdate();
+      con.createQuery(deleteStylistQuery).executeUpdate();
     }
   }
 
@@ -39,27 +39,32 @@ public class AppTest extends FluentTest {
   @Test
   public void rootTest() {
     goTo("http://localhost:4567");
-    assertThat(pageSource()).contains("to do list");
+    assertThat(pageSource()).contains("Scissors N'Razors");
   }
 
   @Test
-  public void addCategoryAndCheckForIt() {
-    Category testCategory = new Category ("Lawncare");
-    testCategory.save();
-    String categoryPath = String.format("http://localhost:4567/categories/%d", testCategory.getId());
-    goTo(categoryPath);
-    assertThat(pageSource()).contains("Lawncare");
-  }
-
-  @Test
-  public void addTaskToCategory() {
+  public void addStylistAndCheckForIt() {
     goTo("http://localhost:4567");
-    fill("#name").with("Lawncare");
+    click("a", withText("Add a new Stylist here:"));
+    fill("#name").with("Sally");
+    fill("#specialty").with("women");
+    fill("#gender").with("female");
     submit(".btn");
-    click("a", withText("Lawncare"));
-    fill("#task").with("Mow the lawn");
+    assertThat(pageSource()).contains("Sally");
+  }
+
+  @Test
+  public void addClientToStylist() {
+    goTo("http://localhost:4567");
+    click("a", withText("Add a new Stylist here:"));
+    fill("#name").with("Sally");
+    fill("#specialty").with("women");
+    fill("#gender").with("female");
     submit(".btn");
-    assertThat(pageSource()).contains("Mow the lawn");
+    click("a", withText("Sally"));
+    fill("#name").with("Cindy");
+    submit(".btn");
+    assertThat(pageSource()).contains("Sally");
   }
 
 }

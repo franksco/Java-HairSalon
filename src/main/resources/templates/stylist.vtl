@@ -1,0 +1,23 @@
+<h1>$stylist.getName()</h1>
+
+<p>Specialty: $stylist.getSpecialty()</p>
+<p>Gender: $stylist.getGender()</p>
+
+#if ($stylist.getClients().size() == 0)
+  <p>Stylist doesn't currently have any clients, would you like to be one?</p>
+#else
+  <h3>$stylist.getName()'s clients:</h3>
+    <ul>
+      #foreach ($client in $stylist.getClients())
+        <li>$client.getName()</li>
+      #end
+    </ul>
+#end
+
+<form action='/stylists/$stylist.getId()' method='post'>
+  <div class="form-group">
+    <label for="name">Client name:</label>
+    <input type= "text" class="form-control" id="name" name="name">
+  </div>
+  <button class="btn" type="submit">Submit</button>
+</form>

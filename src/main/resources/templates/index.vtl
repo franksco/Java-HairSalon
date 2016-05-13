@@ -1,14 +1,5 @@
-<h1>to do list</h1>
+<h1>Scissors N'Razors</h1>
 
-#foreach ($category in $categories)
-  <p><a href="/categories/$category.getId()">$category.getName()</a></p>
-#end
+<p><a href="/stylists/form"> Add a new Stylist here:</a></p>
 
-
-<form action='/categories' method='post'>
-  <div class="form-group">
-    <label for="name">Enter a New Category:</label>
-    <input type= "text" class="form-control" id="name" name="name">
-  </div>
-  <button class="btn" type="submit">Submit</button>
-</form>
+<p><a href="/stylists"> Or checkout our list of stylist's here:</a></p>
