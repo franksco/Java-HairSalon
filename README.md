@@ -8,13 +8,11 @@ A web page made in java that allows you to add a stylist and then add client/s t
 ## Setup/Installation Requirements
 
 * Clone repository
-* Install Postgres and start it in terminal/command line
-* In a new terminal tab type psql
+* Install Postgres and enter postgres in a terminal/command line
+* In a new terminal tab enter psql
 * CREATE DATABASE hair_salon;
-* CREATE TABLE stylist (id serial PRIMARY KEY, name varchar, specialty varchar, gender varchar);
-* CREATE TABLE client (id serial PRIMARY KEY, name varchar, stylist_id int);
-* CREATE DATABASE  hair_salon_test WITH TEMPLATE hair_salon
-* enter "gradle run" in the repositories directory
+* In another terminal tab enter psql hair_salon < hair_salon.SQL
+* enter "gradle run" in the same terminal tab
 * in your browser go to "localhost:4567"
 
 ## Known Bugs
