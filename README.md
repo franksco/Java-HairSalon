@@ -15,6 +15,10 @@ A web page made in java that allows you to add a stylist and then add client/s t
 * enter "gradle run" in the same terminal tab
 * in your browser go to "localhost:4567"
 
+## Support and contact details
+
+You can contact Cory Franks at franksco39@gmail.com
+
 ## Known Bugs
 None so far
 
